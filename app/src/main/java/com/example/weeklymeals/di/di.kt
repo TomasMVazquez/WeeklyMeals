@@ -1,11 +1,14 @@
 package com.example.weeklymeals.di
 
 import android.app.Application
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.applications.toms.data.repository.DailyMealsRepository
 import com.applications.toms.data.source.LocalDataSource
 import com.applications.toms.usecases.dailymeals.GetDailyMeals
 import com.example.weeklymeals.data.database.RoomDataSource
 import com.example.weeklymeals.data.database.WeeklyMealsDatabase
+import com.example.weeklymeals.ui.screens.HomeViewModel
+import com.example.weeklymeals.utils.initialState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
@@ -35,6 +38,7 @@ private val appModule = module {
 private val dataModule = module {
     factory {
         DailyMealsRepository(
+            initialList = initialState(get()),
             localDataSource = get(),
         //    remoteDataSource = get()
         )
@@ -43,4 +47,5 @@ private val dataModule = module {
 
 private val useCasesModule = module {
     single { GetDailyMeals(get()) }
+    single { HomeViewModel(get(), get(), get()) }
 }

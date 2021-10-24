@@ -2,39 +2,30 @@ package com.example.weeklymeals.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.applications.toms.domain.Day
-import com.applications.toms.usecases.dailymeals.GetDailyMeals
 import com.example.weeklymeals.R
-import com.example.weeklymeals.ui.composables.FabShare
 import com.example.weeklymeals.ui.composables.MainAppBar
 import com.example.weeklymeals.ui.composables.MyPager
 import com.example.weeklymeals.ui.composables.RowDayClickable
-import com.example.weeklymeals.ui.initialState
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.getViewModel
 
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
 @Composable
-fun HomeScreen(getDailyMeals: GetDailyMeals){
+fun HomeScreen(homeViewModel: HomeViewModel = getViewModel()){
 
-    val context= LocalContext.current
-    var myWeek by rememberSaveable { mutableStateOf(initialState(context)) }
-    var titleDay by rememberSaveable { mutableStateOf(myWeek[0].day) }
-
-    /** TODO ADD USE CASE LOGIC */
+    val week by homeViewModel.week.observeAsState(initial = emptyList())
+    val firstDay = stringResource(id = R.string.monday)
+    var titleDay by rememberSaveable { mutableStateOf(firstDay) }
 
     Scaffold(
         topBar = { MainAppBar(title = titleDay) }
@@ -42,8 +33,7 @@ fun HomeScreen(getDailyMeals: GetDailyMeals){
 
         HomeContent(
             paddingValues = paddingValues,
-            myWeek = myWeek,
-            titleDay = titleDay,
+            myWeek = week,
             onTitleChange = {
                 titleDay = it
             }
@@ -55,7 +45,7 @@ fun HomeScreen(getDailyMeals: GetDailyMeals){
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
 @Composable
-fun HomeContent(paddingValues: PaddingValues, myWeek: List<Day>, titleDay: String, onTitleChange: (String) -> Unit){
+fun HomeContent(paddingValues: PaddingValues, myWeek: List<Day>, onTitleChange: (String) -> Unit){
 
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()

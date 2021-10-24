@@ -5,8 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
 
-    fun saveDailyMeals(items: List<Day>)
-    fun getDailyMeals(): Flow<List<Day>>
-    fun updateDailyMeal(item: Day)
+    suspend fun isEmpty() : Boolean
+    suspend fun saveDailyMeals(items: List<Day>)
+    suspend fun getDailyMeals(): List<Day>
+    suspend fun updateDailyMeal(item: Day)
 
 }

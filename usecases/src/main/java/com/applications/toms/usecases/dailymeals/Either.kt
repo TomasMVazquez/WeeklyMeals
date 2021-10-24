@@ -1,4 +1,4 @@
-package com.applications.toms.data
+package com.applications.toms.usecases.dailymeals
 
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind

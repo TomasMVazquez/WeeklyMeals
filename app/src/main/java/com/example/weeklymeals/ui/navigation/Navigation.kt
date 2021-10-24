@@ -19,7 +19,7 @@ fun Navigation(){
     NavHost(navController = navController, startDestination = "home") {
         composable("home"){
             WeeklyMealsApp {
-                HomeScreen(getDailyMeals = get())
+                HomeScreen()
             }
         }
         composable("edit"){

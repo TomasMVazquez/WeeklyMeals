@@ -5,12 +5,17 @@ import com.applications.toms.data.source.RemoteDataSource
 import com.applications.toms.domain.Day
 
 class DailyMealsRepository(
+    private val initialList: List<Day>,
     private val localDataSource: LocalDataSource,
     //private val remoteDataSource: RemoteDataSource
     ) {
 
-    fun saveDailyMeals(items: List<Day>) = localDataSource.saveDailyMeals(items)
-    fun getDailyMeals() = localDataSource.getDailyMeals()
-    fun updateDailyMeal(item: Day) = localDataSource.updateDailyMeal(item)
-
+    suspend fun saveDailyMeals(items: List<Day>) = localDataSource.saveDailyMeals(items)
+    suspend fun getDailyMeals(): List<Day> {
+        if (localDataSource.isEmpty()){
+            saveDailyMeals(initialList)
+        }
+        return localDataSource.getDailyMeals()
+    }
+    suspend fun updateDailyMeal(item: Day) = localDataSource.updateDailyMeal(item)
 }

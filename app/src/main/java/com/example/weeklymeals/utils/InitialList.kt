@@ -1,4 +1,4 @@
-package com.example.weeklymeals.ui
+package com.example.weeklymeals.utils
 
 import android.content.Context
 import androidx.compose.runtime.Composable
