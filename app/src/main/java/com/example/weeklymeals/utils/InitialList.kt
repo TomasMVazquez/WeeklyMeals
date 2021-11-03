@@ -18,17 +18,14 @@ fun initialState(): List<Day> {
     val day5 = stringResource(id = R.string.saturday)
     val day6 = stringResource(id = R.string.sunday)
 
-    val lunchOf = stringResource(id = R.string.lunch_of)
-    val dinerOf = stringResource(id = R.string.diner_of)
-
    return listOf<Day>(
-        Day(0, day0, Meal(LUNCH,"$lunchOf $day0"), Meal(DINER,"$dinerOf $day0")),
-        Day(1, day1, Meal(LUNCH,"$lunchOf $day1"), Meal(DINER,"$dinerOf $day1")),
-        Day(2, day2, Meal(LUNCH,"$lunchOf $day2"), Meal(DINER,"$dinerOf $day2")),
-        Day(3, day3, Meal(LUNCH,"$lunchOf $day3"), Meal(DINER,"$dinerOf $day3")),
-        Day(4, day4, Meal(LUNCH,"$lunchOf $day4"), Meal(DINER,"$dinerOf $day4")),
-        Day(5, day5, Meal(LUNCH,"$lunchOf $day5"), Meal(DINER,"$dinerOf $day5")),
-        Day(6, day6, Meal(LUNCH,"$lunchOf $day6"), Meal(DINER,"$dinerOf $day6")),
+        Day(0, day0, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(1, day1, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(2, day2, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(3, day3, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(4, day4, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(5, day5, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(6, day6, Meal(LUNCH,""), Meal(DINER,"")),
     )
 }
 
@@ -41,16 +38,13 @@ fun initialState(context: Context): List<Day> {
     val day5 = context.resources.getString(R.string.saturday)
     val day6 = context.resources.getString(R.string.sunday)
 
-    val lunchOf = context.resources.getString(R.string.lunch_of)
-    val dinerOf = context.resources.getString(R.string.diner_of)
-
     return listOf<Day>(
-        Day(0, day0, Meal(LUNCH,"$lunchOf $day0"), Meal(DINER,"$dinerOf $day0")),
-        Day(1, day1, Meal(LUNCH,"$lunchOf $day1"), Meal(DINER,"$dinerOf $day1")),
-        Day(2, day2, Meal(LUNCH,"$lunchOf $day2"), Meal(DINER,"$dinerOf $day2")),
-        Day(3, day3, Meal(LUNCH,"$lunchOf $day3"), Meal(DINER,"$dinerOf $day3")),
-        Day(4, day4, Meal(LUNCH,"$lunchOf $day4"), Meal(DINER,"$dinerOf $day4")),
-        Day(5, day5, Meal(LUNCH,"$lunchOf $day5"), Meal(DINER,"$dinerOf $day5")),
-        Day(6, day6, Meal(LUNCH,"$lunchOf $day6"), Meal(DINER,"$dinerOf $day6")),
+        Day(0, day0, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(1, day1, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(2, day2, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(3, day3, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(4, day4, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(5, day5, Meal(LUNCH,""), Meal(DINER,"")),
+        Day(6, day6, Meal(LUNCH,""), Meal(DINER,"")),
     )
 }

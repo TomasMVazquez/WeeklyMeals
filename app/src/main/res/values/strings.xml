@@ -2,8 +2,7 @@
     <string name="app_name">Weekly Meals</string>
     <string name="lunch">Almuerzo</string>
     <string name="diner">Cena</string>
-    <string name="description_icon_share">Botón para compartir</string>
-    <string name="description_icon_edit">Botón para editar</string>
+
     <string name="edit_title">Editar comidas de la semana</string>
 
     <string name="monday">Lunes</string>
@@ -14,6 +13,16 @@
     <string name="saturday">Sabado</string>
     <string name="sunday">Domingo</string>
 
+    <string name="save">Guardar</string>
+
     <string name="lunch_of">Almuerzo de</string>
     <string name="diner_of">Cena de</string>
+    <string name="click_here">Click aquí para ingresar </string>
+    <string name="empty_meal">Oops…\nesto está muy vacio</string>
+
+    <string name="description_icon_share">Botón para compartir</string>
+    <string name="description_icon_edit">Botón para editar</string>
+    <string name="description_icon_save">Guardar cambios</string>
+    <string name="description_arrow_back">Ir a la pantalla anterior</string>
+    <string name="description_clear_text">Borrar texto</string>
 </resources>

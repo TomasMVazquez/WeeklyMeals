@@ -30,7 +30,7 @@ class RoomDataSource(db: WeeklyMealsDatabase) : LocalDataSource {
 
     override suspend fun updateDailyMeal(item: Day) {
         withContext(Dispatchers.IO) {
-
+            dao.update(item.toDatabaseModel())
         }
     }
 

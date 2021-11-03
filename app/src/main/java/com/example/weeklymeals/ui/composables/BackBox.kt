@@ -7,8 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.applications.toms.domain.Meal
+import com.example.weeklymeals.R
 
 @Composable
 fun BackBox(meal: Meal, colorList: List<Color>){
@@ -31,7 +33,7 @@ fun BackBox(meal: Meal, colorList: List<Color>){
             modifier = Modifier
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
-            text = meal.meal
+            text = if(meal.meal.isNotEmpty()) meal.meal else stringResource(id = R.string.empty_meal)
         )
     }
 }

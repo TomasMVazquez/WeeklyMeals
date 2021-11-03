@@ -11,6 +11,7 @@ class DailyMealsRepository(
     ) {
 
     suspend fun saveDailyMeals(items: List<Day>) = localDataSource.saveDailyMeals(items)
+
     suspend fun getDailyMeals(): List<Day> {
         if (localDataSource.isEmpty()){
             saveDailyMeals(initialList)

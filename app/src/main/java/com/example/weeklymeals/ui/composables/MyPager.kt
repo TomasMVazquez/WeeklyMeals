@@ -4,6 +4,7 @@ import com.example.weeklymeals.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.*
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import com.applications.toms.domain.Day
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -23,7 +25,13 @@ fun MyPager(week: List<Day>, pagerState: PagerState){
     HorizontalPager(
         count = week.size,
         modifier = Modifier
-            .background(Color.LightGray),
+            .background(Color.LightGray)
+            .padding(
+                start = dimensionResource(id = R.dimen.zeroDp),
+                top = dimensionResource(id = R.dimen.zeroDp),
+                end = dimensionResource(id = R.dimen.zeroDp),
+                bottom = dimensionResource(id = R.dimen.padding_48)
+            ),
         state = pagerState
     ) { page ->
         var cardLunchFace by remember { mutableStateOf(CardFace.Front) }
