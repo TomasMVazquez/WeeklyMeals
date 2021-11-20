@@ -41,7 +41,6 @@ fun HomeScreen(onEditClick: (List<Day>) -> Unit, homeViewModel: HomeViewModel = 
             onShareClick = { onShare(context, query) }
         ) }
     ) { paddingValues ->
-
         HomeContent(
             paddingValues = paddingValues,
             myWeek = week,
@@ -49,9 +48,7 @@ fun HomeScreen(onEditClick: (List<Day>) -> Unit, homeViewModel: HomeViewModel = 
                 titleDay = it
             }
         )
-
     }
-
 }
 
 @ExperimentalPagerApi

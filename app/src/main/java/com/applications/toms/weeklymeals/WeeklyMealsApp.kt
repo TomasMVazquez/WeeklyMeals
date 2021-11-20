@@ -1,26 +1,33 @@
 package com.applications.toms.weeklymeals
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import com.applications.toms.weeklymeals.ui.navigation.Navigation
 import com.applications.toms.weeklymeals.ui.theme.WeeklyMealsTheme
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+@ExperimentalPagerApi
+@ExperimentalMaterialApi
 @Composable
-fun WeeklyMealsApp(content: @Composable () -> Unit){
+fun WeeklyMealsApp(){
+    val appState = rememberWeeklyMealsAppState()
+
     WeeklyMealsTheme {
-        val systemUiController = rememberSystemUiController()
         val statusBarColor = MaterialTheme.colors.primaryVariant
         SideEffect {
-            systemUiController.setSystemBarsColor(
+            appState.systemUiController.setSystemBarsColor(
                 color = statusBarColor,
                 darkIcons = false
             )
         }
         // A surface container using the 'background' color from the theme
         Surface(color = MaterialTheme.colors.background) {
-            content()
+            Navigation(navController = appState.nacController)
         }
     }
 }

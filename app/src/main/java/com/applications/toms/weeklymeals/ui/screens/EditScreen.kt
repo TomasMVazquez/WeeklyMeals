@@ -15,6 +15,7 @@ import com.applications.toms.domain.Day
 import com.applications.toms.weeklymeals.R
 import com.applications.toms.weeklymeals.ui.composables.BackTopAppBar
 import com.applications.toms.weeklymeals.ui.composables.EditableDayItem
+import com.applications.toms.weeklymeals.ui.composables.SaveFloatingActionButton
 import com.applications.toms.weeklymeals.utils.initialState
 import org.koin.androidx.compose.getViewModel
 
@@ -34,21 +35,9 @@ fun EditScreen(myWeek: List<Day>, onBackClick: () -> Unit, editViewModel: EditVi
             )
         },
         floatingActionButton = {
-            ExtendedFloatingActionButton(
-                text = {
-                    Text(text = stringResource(id = R.string.save))
-                },
-                icon = {
-                    Icon(
-                        imageVector = Icons.Rounded.Save,
-                        contentDescription = stringResource(R.string.description_icon_save)
-                    )
-                },
-                backgroundColor = if (!savingState) MaterialTheme.colors.secondary else Color.Gray,
-                onClick = {
-                    if (!savingState) editViewModel.saveListToDB(weekMeals)
-                }
-            )
+            SaveFloatingActionButton(enable = savingState) {
+                editViewModel.saveListToDB(weekMeals)
+            }
         },
         floatingActionButtonPosition = FabPosition.Center
     ){ paddingValues ->
