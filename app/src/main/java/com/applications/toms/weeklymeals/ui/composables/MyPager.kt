@@ -17,11 +17,15 @@ import com.applications.toms.domain.Day
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
+import kotlinx.coroutines.launch
+import java.util.*
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
-fun MyPager(week: List<Day>, pagerState: PagerState){
+fun MyPager(week: List<Day>, dayOfWeek: Int, pagerState: PagerState){
+    val coroutineScope = rememberCoroutineScope()
+
     HorizontalPager(
         count = week.size,
         modifier = Modifier
@@ -34,6 +38,11 @@ fun MyPager(week: List<Day>, pagerState: PagerState){
             ),
         state = pagerState
     ) { page ->
+
+        coroutineScope.launch {
+            pagerState.scrollToPage(dayOfWeek)
+        }
+
         var cardLunchFace by remember { mutableStateOf(CardFace.Front) }
         var cardDinerFace by remember { mutableStateOf(CardFace.Front) }
 

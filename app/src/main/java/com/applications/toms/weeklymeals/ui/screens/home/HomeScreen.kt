@@ -16,6 +16,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
+import java.time.LocalDate
+import java.util.*
 
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
@@ -52,6 +54,17 @@ fun HomeScreen(onEditClick: () -> Unit, homeViewModel: HomeViewModel = getViewMo
 @Composable
 fun HomeContent(paddingValues: PaddingValues, myWeek: List<Day>, onTitleChange: (String) -> Unit){
 
+    val dayOfWeek: Int = when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+        1 -> 6
+        2 -> 0
+        3 -> 1
+        4 -> 2
+        5 -> 3
+        6 -> 4
+        7 -> 5
+        else -> 0
+    }
+
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
     var idPressed by rememberSaveable { mutableStateOf(0) }
@@ -71,11 +84,13 @@ fun HomeContent(paddingValues: PaddingValues, myWeek: List<Day>, onTitleChange: 
 
         MyPager(
             week = myWeek,
-            pagerState = pagerState
+            dayOfWeek,
+            pagerState = pagerState,
         )
 
         RowDayClickable(
             days = myWeek,
+            dayOfWeek,
             id = idPressed,
             onClick = { day ->
                 coroutineScope.launch{

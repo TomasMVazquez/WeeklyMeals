@@ -5,18 +5,25 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.applications.toms.domain.Day
 import com.applications.toms.weeklymeals.R
+import kotlinx.coroutines.launch
 
 @Composable
-fun RowDayClickable(days: List<Day>, id: Int, onClick: (Day) -> Unit) {
+fun RowDayClickable(days: List<Day>, dayOfWeek: Int, id: Int, onClick: (Day) -> Unit) {
+    val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+
     LazyRow(
         modifier = Modifier
             .padding(all = dimensionResource(id = R.dimen.padding_8)),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        state = listState
     ){
         items(days){
             CardDay(
@@ -27,6 +34,9 @@ fun RowDayClickable(days: List<Day>, id: Int, onClick: (Day) -> Unit) {
                         onClick(it)
                     }
             )
+        }
+        coroutineScope.launch {
+            listState.scrollToItem(dayOfWeek)
         }
     }
 }
