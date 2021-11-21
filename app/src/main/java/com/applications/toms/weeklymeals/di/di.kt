@@ -31,7 +31,6 @@ private val appModule = module {
     single { WeeklyMealsDatabase.build(context = get()) }
 
     factory<LocalDataSource> { RoomDataSource(db = get()) }
-    //factory<RemoteDataSource> { ServerDataSource() }
 
     single<CoroutineDispatcher> { Dispatchers.Main }
 }
@@ -41,7 +40,6 @@ private val dataModule = module {
         DailyMealsRepository(
             initialList = initialState(get()),
             localDataSource = get(),
-        //    remoteDataSource = get()
         )
     }
 }

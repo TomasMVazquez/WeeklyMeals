@@ -11,67 +11,6 @@ import androidx.compose.ui.res.dimensionResource
 import com.applications.toms.weeklymeals.R
 
 @Composable
-fun EditableDayBoxRow(
-    titleColumn: @Composable () -> Unit = {},
-    contentColumn: @Composable () -> Unit = {}
-){
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(dimensionResource(id = R.dimen.padding_4)),
-        border = BorderStroke(
-            width = dimensionResource(id = R.dimen.stroke_1),
-            color = Color.LightGray
-        )
-    ){
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(dimensionResource(id = R.dimen.padding_4)),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .weight(
-                        weight = 1f,
-                        fill = true
-                    )
-                    .fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    titleColumn()
-                }
-            }
-
-            Box(
-                modifier = Modifier
-                    .weight(
-                        weight = 2.5f,
-                        fill = true
-                    )
-                    .fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    modifier = Modifier
-                        .wrapContentHeight(),
-                    verticalArrangement = Arrangement.SpaceBetween
-                ) {
-                    contentColumn()
-                }
-            }
-        }
-    }
-}
-
-@Composable
 fun EditableDayBoxColumn(
     titleColumn: @Composable () -> Unit = {},
     contentColumn: @Composable () -> Unit = {},
@@ -95,8 +34,7 @@ fun EditableDayBoxColumn(
             horizontalAlignment = Alignment.Start
         ) {
             Box(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterStart
             ) {
                 Column(
