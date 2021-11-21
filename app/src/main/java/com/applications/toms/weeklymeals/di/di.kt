@@ -7,8 +7,8 @@ import com.applications.toms.usecases.dailymeals.GetDailyMeals
 import com.applications.toms.usecases.dailymeals.SaveDailyMeals
 import com.applications.toms.weeklymeals.data.database.RoomDataSource
 import com.applications.toms.weeklymeals.data.database.WeeklyMealsDatabase
-import com.applications.toms.weeklymeals.ui.screens.EditViewModel
-import com.applications.toms.weeklymeals.ui.screens.HomeViewModel
+import com.applications.toms.weeklymeals.ui.screens.edit.EditViewModel
+import com.applications.toms.weeklymeals.ui.screens.home.HomeViewModel
 import com.applications.toms.weeklymeals.utils.initialState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -50,5 +50,5 @@ private val useCasesModule = module {
     single { GetDailyMeals(get()) }
     single { SaveDailyMeals(get()) }
     single { HomeViewModel(get(), get()) }
-    single { EditViewModel(get(), get()) }
+    single { EditViewModel(get(), get(), get()) }
 }

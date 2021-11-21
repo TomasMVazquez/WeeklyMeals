@@ -22,7 +22,8 @@ fun List<Day>.asDeeplinkString(): String {
             Calendar.MONTH)}/${Calendar.getInstance().get(Calendar.YEAR)}"*/
     this.forEach {
         query +="${it.day}=${it.lunch.getMealTypeText()}:${it.lunch.meal.replace(" ","_")}" +
-                "|${it.diner.getMealTypeText()}:${it.diner.meal.replace(" ","_")}-"
+                "|${it.diner.getMealTypeText()}:${it.diner.meal.replace(" ","_")}"
+        if (this.last() != it) query += "-"
     }
     return query
 }
@@ -31,7 +32,23 @@ fun List<Day>.asDeeplinkString(): String {
 fun String.fromDeepLink(): List<Day> {
     val days: List<String> = this.split("-")
     val shareWeek = mutableListOf<Day>()
-    days.forEach {
+    for (index in 0..6){
+        val stringDay = days[index]
+        val day = Day(
+            id = index,
+            day = stringDay.split("=").first(),
+            lunch = Meal(
+                mealType = LUNCH,
+                meal = stringDay.split("=").last().split("|").first().split(":").last().replace("_"," ")
+            ),
+            diner = Meal(
+                mealType = DINER,
+                meal = stringDay.split("=").last().split("|").last().split(":").last().replace("_"," ")
+            )
+        )
+        shareWeek.add(day)
+    }
+    /*days.forEach {
         val day = Day(
             id = days.indexOf(it),
             day = it.split("=").first(),
@@ -45,7 +62,7 @@ fun String.fromDeepLink(): List<Day> {
             )
         )
         shareWeek.add(day)
-    }
+    }*/
     return shareWeek.toList()
 }
 

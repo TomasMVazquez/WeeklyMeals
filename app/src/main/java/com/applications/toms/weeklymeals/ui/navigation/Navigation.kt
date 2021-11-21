@@ -10,8 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.applications.toms.domain.Day
 import com.applications.toms.weeklymeals.ui.navigation.NavItem.*
-import com.applications.toms.weeklymeals.ui.screens.EditScreen
-import com.applications.toms.weeklymeals.ui.screens.HomeScreen
+import com.applications.toms.weeklymeals.ui.screens.edit.EditScreen
+import com.applications.toms.weeklymeals.ui.screens.home.HomeScreen
 import com.applications.toms.weeklymeals.utils.fromDeepLink
 import com.applications.toms.weeklymeals.utils.fromJson
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -33,17 +33,14 @@ private fun NavGraphBuilder.nav(navController: NavController) {
     composable(Main) {
         it.arguments
         HomeScreen(
-            onEditClick = { myWeek ->
-                val jsonString = Gson().toJson(myWeek)
-                navController.navigate(Edit.createRoute(jsonString))
+            onEditClick = {
+                navController.navigate(Edit.route)
             }
         )
     }
 
     composable(Edit) {
-        val myWeek: List<Day> = Gson().fromJson(it.findArg<String>(NavArg.ItemMyWeek))
         EditScreen(
-            myWeek = myWeek,
             onBackClick = {
                 navController.popBackStack()
             }
@@ -54,7 +51,7 @@ private fun NavGraphBuilder.nav(navController: NavController) {
         val shareString = it.findArg<String>(NavArg.ItemShareWeek)
         val shareWeek = shareString.fromDeepLink()
         EditScreen(
-            myWeek = shareWeek,
+            shareList = shareWeek,
             onBackClick = {
                 navController.navigateUp()
             }

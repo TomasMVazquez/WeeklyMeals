@@ -1,15 +1,12 @@
-package com.applications.toms.weeklymeals.ui.screens
+package com.applications.toms.weeklymeals.ui.screens.edit
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Save
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.applications.toms.domain.Day
 import com.applications.toms.weeklymeals.R
@@ -20,10 +17,12 @@ import com.applications.toms.weeklymeals.utils.initialState
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun EditScreen(myWeek: List<Day>, onBackClick: () -> Unit, editViewModel: EditViewModel = getViewModel()){
+fun EditScreen(shareList: List<Day> = emptyList(), onBackClick: () -> Unit, editViewModel: EditViewModel = getViewModel()){
 
     val weekMeals by editViewModel.weekMeals.observeAsState(initial = initialState())
-    if (myWeek.isNotEmpty()) editViewModel.starting(myWeek) //TODO CHANGE BY LIST FROM HOME
+
+    if (!shareList.isNullOrEmpty())
+        editViewModel.getShareList(shareList)
 
     val savingState by editViewModel.saving.observeAsState(initial = false)
 
@@ -36,7 +35,7 @@ fun EditScreen(myWeek: List<Day>, onBackClick: () -> Unit, editViewModel: EditVi
         },
         floatingActionButton = {
             SaveFloatingActionButton(enable = savingState) {
-                editViewModel.saveListToDB(weekMeals)
+                editViewModel.saveListToDB(if (!shareList.isNullOrEmpty()) shareList else weekMeals)
             }
         },
         floatingActionButtonPosition = FabPosition.Center

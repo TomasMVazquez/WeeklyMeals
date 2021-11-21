@@ -1,4 +1,4 @@
-package com.applications.toms.weeklymeals.ui.screens
+package com.applications.toms.weeklymeals.ui.screens.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,10 +17,6 @@ class HomeViewModel(
 
     private val _week = MutableLiveData(emptyList<Day>())
     val week: LiveData<List<Day>> = _week
-
-    init {
-//        getListFromUseCase()
-    }
 
     fun getListFromUseCase(){
         launch {

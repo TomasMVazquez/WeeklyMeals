@@ -1,4 +1,4 @@
-package com.applications.toms.weeklymeals.ui.screens
+package com.applications.toms.weeklymeals.ui.screens.home
 
 import android.content.Context
 import android.content.Intent
@@ -23,7 +23,7 @@ import org.koin.androidx.compose.getViewModel
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
 @Composable
-fun HomeScreen(onEditClick: (List<Day>) -> Unit, homeViewModel: HomeViewModel = getViewModel()){
+fun HomeScreen(onEditClick: () -> Unit, homeViewModel: HomeViewModel = getViewModel()){
 
     val context = LocalContext.current
     val week by homeViewModel.week.observeAsState(initial = emptyList())
@@ -37,7 +37,7 @@ fun HomeScreen(onEditClick: (List<Day>) -> Unit, homeViewModel: HomeViewModel = 
     Scaffold(
         topBar = { MyMainTopAppBar(
             title = titleDay,
-            onEditClick = { onEditClick(week) },
+            onEditClick = { onEditClick() },
             onShareClick = { onShare(context, query) }
         ) }
     ) { paddingValues ->

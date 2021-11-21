@@ -8,8 +8,6 @@ import androidx.compose.runtime.SideEffect
 import com.applications.toms.weeklymeals.ui.navigation.Navigation
 import com.applications.toms.weeklymeals.ui.theme.WeeklyMealsTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.systemuicontroller.SystemUiController
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
