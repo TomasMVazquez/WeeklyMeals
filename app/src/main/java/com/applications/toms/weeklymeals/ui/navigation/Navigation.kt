@@ -2,21 +2,20 @@ package com.applications.toms.weeklymeals.ui.navigation
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.applications.toms.domain.Day
 import com.applications.toms.weeklymeals.ui.navigation.NavItem.*
 import com.applications.toms.weeklymeals.ui.screens.edit.EditScreen
 import com.applications.toms.weeklymeals.ui.screens.home.HomeScreen
 import com.applications.toms.weeklymeals.utils.fromDeepLink
-import com.applications.toms.weeklymeals.utils.fromJson
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.gson.Gson
 
+@ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
@@ -26,6 +25,7 @@ fun Navigation(navController: NavHostController){
     }
 }
 
+@ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 private fun NavGraphBuilder.nav(navController: NavController) {

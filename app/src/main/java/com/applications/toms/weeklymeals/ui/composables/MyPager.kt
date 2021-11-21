@@ -23,7 +23,7 @@ import java.util.*
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
-fun MyPager(week: List<Day>, dayOfWeek: Int, pagerState: PagerState){
+fun MyPager(week: List<Day>, pagerState: PagerState){
     val coroutineScope = rememberCoroutineScope()
 
     HorizontalPager(
@@ -38,10 +38,6 @@ fun MyPager(week: List<Day>, dayOfWeek: Int, pagerState: PagerState){
             ),
         state = pagerState
     ) { page ->
-
-        coroutineScope.launch {
-            pagerState.scrollToPage(dayOfWeek)
-        }
 
         var cardLunchFace by remember { mutableStateOf(CardFace.Front) }
         var cardDinerFace by remember { mutableStateOf(CardFace.Front) }

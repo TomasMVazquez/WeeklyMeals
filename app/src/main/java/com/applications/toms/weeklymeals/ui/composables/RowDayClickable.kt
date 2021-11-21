@@ -15,15 +15,12 @@ import com.applications.toms.weeklymeals.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun RowDayClickable(days: List<Day>, dayOfWeek: Int, id: Int, onClick: (Day) -> Unit) {
-    val listState = rememberLazyListState()
-    val coroutineScope = rememberCoroutineScope()
+fun RowDayClickable(days: List<Day>, id: Int, onClick: (Day) -> Unit) {
 
     LazyRow(
         modifier = Modifier
             .padding(all = dimensionResource(id = R.dimen.padding_8)),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        state = listState
+        horizontalArrangement = Arrangement.SpaceEvenly
     ){
         items(days){
             CardDay(
@@ -34,9 +31,6 @@ fun RowDayClickable(days: List<Day>, dayOfWeek: Int, id: Int, onClick: (Day) -> 
                         onClick(it)
                     }
             )
-        }
-        coroutineScope.launch {
-            listState.scrollToItem(dayOfWeek)
         }
     }
 }

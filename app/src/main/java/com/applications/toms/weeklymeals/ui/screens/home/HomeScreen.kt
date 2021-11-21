@@ -2,6 +2,7 @@ package com.applications.toms.weeklymeals.ui.screens.home
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -68,6 +69,7 @@ fun HomeContent(paddingValues: PaddingValues, myWeek: List<Day>, onTitleChange: 
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
     var idPressed by rememberSaveable { mutableStateOf(0) }
+    var firstEntry by rememberSaveable { mutableStateOf(true) }
 
     Box(
         modifier = Modifier
@@ -84,13 +86,11 @@ fun HomeContent(paddingValues: PaddingValues, myWeek: List<Day>, onTitleChange: 
 
         MyPager(
             week = myWeek,
-            dayOfWeek,
             pagerState = pagerState,
         )
 
         RowDayClickable(
             days = myWeek,
-            dayOfWeek,
             id = idPressed,
             onClick = { day ->
                 coroutineScope.launch{
@@ -100,12 +100,20 @@ fun HomeContent(paddingValues: PaddingValues, myWeek: List<Day>, onTitleChange: 
                 }
             }
         )
+
+        if (pagerState.pageCount > 0 && firstEntry){
+            firstEntry = false
+            coroutineScope.launch {
+                pagerState.scrollToPage(dayOfWeek)
+            }
+        }
     }
 }
 
 fun onShare(context: Context,query: String) {
     val sendIntent = Intent().apply {
         action = Intent.ACTION_SEND
+        addFlags(FLAG_ACTIVITY_NEW_TASK)
         putExtra(Intent.EXTRA_SUBJECT, "Comartiendo comida de la semana")
         putExtra(Intent.EXTRA_TEXT, "https://com.applications.toms.weeklymeals/edit/deeplink/${query}")
         type = "text/plain"
