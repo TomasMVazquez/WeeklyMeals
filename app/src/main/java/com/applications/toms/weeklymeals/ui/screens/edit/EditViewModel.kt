@@ -1,6 +1,5 @@
 package com.applications.toms.weeklymeals.ui.screens.edit
 
-import androidx.lifecycle.SavedStateHandle
 import com.applications.toms.domain.Day
 import com.applications.toms.usecases.dailymeals.GetDailyMeals
 import com.applications.toms.usecases.dailymeals.SaveDailyMeals

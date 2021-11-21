@@ -17,8 +17,6 @@ import com.applications.toms.domain.Day
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
-import kotlinx.coroutines.launch
-import java.util.*
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
