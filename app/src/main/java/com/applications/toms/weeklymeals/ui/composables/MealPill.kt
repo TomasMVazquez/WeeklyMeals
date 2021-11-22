@@ -2,6 +2,7 @@ package com.applications.toms.weeklymeals.ui.composables
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -9,8 +10,10 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -19,9 +22,11 @@ import com.applications.toms.domain.Meal
 import com.applications.toms.weeklymeals.R
 import com.applications.toms.weeklymeals.utils.getMealTypeText
 
+@ExperimentalComposeUiApi
 @Composable
-fun MealPill(meal: Meal){
+fun MealPill(meal: Meal, onMealChange: (Meal) -> Unit){
     var text by rememberSaveable { mutableStateOf(meal.meal) }
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Card(
         modifier = Modifier
@@ -45,6 +50,7 @@ fun MealPill(meal: Meal){
                     it.let {
                         text = it
                         meal.meal = it
+                        onMealChange(meal)
                     }
                 },
                 modifier = Modifier
@@ -57,10 +63,19 @@ fun MealPill(meal: Meal){
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Done
                 ),
+                keyboardActions = KeyboardActions(
+                    onDone = { keyboardController?.hide() }
+                ),
                 shape = CircleShape,
                 trailingIcon = {
                     if (text.isNotEmpty()){
-                        IconButton(onClick = { text = "" }) {
+                        IconButton(
+                            onClick = {
+                                text = ""
+                                meal.meal = ""
+                                onMealChange(meal)
+                            }
+                        ) {
                             Icon(
                                 imageVector = Icons.Default.Clear,
                                 contentDescription = stringResource(R.string.description_clear_text)

@@ -22,11 +22,8 @@ sealed class NavItem(
     )
 
     object Edit: NavItem(
-        baseRoute = EDIT_SCREEN,
-        navArgs = listOf(NavArg.ItemMyWeek)
-    ){
-        fun createRoute(ItemMyWeek: String) = "$baseRoute/$ItemMyWeek"
-    }
+        baseRoute = EDIT_SCREEN
+    )
 
     object Deeplink: NavItem(
         baseRoute = DEEPLINK_EDIT,
@@ -51,7 +48,6 @@ sealed class NavItem(
 }
 
 enum class NavArg(val key: String, val navType: NavType<*>) {
-    ItemMyWeek("myWeek", NavType.StringType),
     ItemShareWeek("shareWeek", NavType.StringType)
 }
 

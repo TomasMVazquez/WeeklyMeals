@@ -13,6 +13,7 @@ import com.applications.toms.weeklymeals.R
 
 @Composable
 fun RowDayClickable(days: List<Day>, id: Int, onClick: (Day) -> Unit) {
+
     LazyRow(
         modifier = Modifier
             .padding(all = dimensionResource(id = R.dimen.padding_8)),

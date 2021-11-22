@@ -7,7 +7,6 @@ import com.applications.toms.domain.Day
 class DailyMealsRepository(
     private val initialList: List<Day>,
     private val localDataSource: LocalDataSource,
-    //private val remoteDataSource: RemoteDataSource
     ) {
 
     suspend fun saveDailyMeals(items: List<Day>) = localDataSource.saveDailyMeals(items)
