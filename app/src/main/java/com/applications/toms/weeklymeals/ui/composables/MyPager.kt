@@ -22,6 +22,8 @@ import com.google.accompanist.pager.PagerState
 @ExperimentalPagerApi
 @Composable
 fun MyPager(week: List<Day>, pagerState: PagerState){
+    val coroutineScope = rememberCoroutineScope()
+
     HorizontalPager(
         count = week.size,
         modifier = Modifier
@@ -34,6 +36,7 @@ fun MyPager(week: List<Day>, pagerState: PagerState){
             ),
         state = pagerState
     ) { page ->
+
         var cardLunchFace by remember { mutableStateOf(CardFace.Front) }
         var cardDinerFace by remember { mutableStateOf(CardFace.Front) }
 
