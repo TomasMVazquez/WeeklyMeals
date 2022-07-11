@@ -12,7 +12,10 @@ import androidx.compose.ui.res.stringResource
 import com.applications.toms.weeklymeals.R
 
 @Composable
-fun SaveFloatingActionButton(enable: Boolean,onClick: () -> Unit) {
+fun SaveFloatingActionButton(
+    enable: Boolean = true,
+    onClick: () -> Unit
+) {
     ExtendedFloatingActionButton(
         text = {
             Text(text = stringResource(id = R.string.save))
@@ -23,7 +26,7 @@ fun SaveFloatingActionButton(enable: Boolean,onClick: () -> Unit) {
                 contentDescription = stringResource(R.string.description_icon_save)
             )
         },
-        backgroundColor = if (!enable) MaterialTheme.colors.secondary else Color.Gray,
-        onClick = { if (!enable) onClick() }
+        backgroundColor = if (enable) MaterialTheme.colors.secondary else Color.Gray,
+        onClick = { if (enable) onClick() }
     )
 }
