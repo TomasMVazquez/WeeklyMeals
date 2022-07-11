@@ -25,4 +25,5 @@
     <string name="description_icon_save">Guardar cambios</string>
     <string name="description_arrow_back">Ir a la pantalla anterior</string>
     <string name="description_clear_text">Borrar texto</string>
+    <string name="share_title">Compartiendo comida de la semana</string>
 </resources>

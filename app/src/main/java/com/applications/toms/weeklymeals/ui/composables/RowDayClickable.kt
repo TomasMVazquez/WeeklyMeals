@@ -12,14 +12,18 @@ import com.applications.toms.domain.Day
 import com.applications.toms.weeklymeals.R
 
 @Composable
-fun RowDayClickable(days: List<Day>, id: Int, onClick: (Day) -> Unit) {
+fun RowDayClickable(
+    days: List<Day>,
+    id: Int,
+    onClick: (Day) -> Unit
+) {
 
     LazyRow(
         modifier = Modifier
             .padding(all = dimensionResource(id = R.dimen.padding_8)),
         horizontalArrangement = Arrangement.SpaceEvenly
-    ){
-        items(days){
+    ) {
+        items(days) {
             CardDay(
                 day = it,
                 id = id,

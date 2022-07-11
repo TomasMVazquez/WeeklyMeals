@@ -1,19 +1,23 @@
 package com.applications.toms.weeklymeals.ui.composables
 
-import com.applications.toms.weeklymeals.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import com.applications.toms.domain.Day
+import com.applications.toms.weeklymeals.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -21,8 +25,10 @@ import com.google.accompanist.pager.PagerState
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
 @Composable
-fun MyPager(week: List<Day>, pagerState: PagerState){
-    val coroutineScope = rememberCoroutineScope()
+fun MyPager(
+    week: List<Day>,
+    pagerState: PagerState
+) {
 
     HorizontalPager(
         count = week.size,

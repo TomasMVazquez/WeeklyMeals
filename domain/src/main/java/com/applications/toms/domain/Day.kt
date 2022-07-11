@@ -4,5 +4,6 @@ data class Day(
     val id: Int,
     val day: String,
     val lunch: Meal,
-    val diner: Meal
+    val diner: Meal,
+    var currentDay: Boolean = false
 )
