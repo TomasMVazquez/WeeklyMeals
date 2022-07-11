@@ -21,8 +21,8 @@ class RoomDataSource(db: WeeklyMealsDatabase) : LocalDataSource {
 
     override suspend fun saveDailyMeals(items: List<Day>): Either<EitherState, ErrorStates> =
         withContext(Dispatchers.IO) {
-            val response = dao.insertAll(items = items.map { it.toDatabaseModel() }.toTypedArray())
-            if (response > 0 ) eitherSuccess(EitherState.SUCCESS)
+            val response = items.map { dao.insert(it.toDatabaseModel()) }
+            if (response.all { it > 0 } ) eitherSuccess(EitherState.SUCCESS)
             else eitherFailure(ErrorStates.DB_ERROR)
         }
 

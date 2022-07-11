@@ -1,10 +1,10 @@
 package com.applications.toms.weeklymeals.ui.screens.edit
 
+import com.applications.toms.data.onFailure
+import com.applications.toms.data.onSuccess
 import com.applications.toms.domain.Day
 import com.applications.toms.usecases.dailymeals.GetDailyMeals
 import com.applications.toms.usecases.dailymeals.SaveDailyMeals
-import com.applications.toms.usecases.dailymeals.onFailure
-import com.applications.toms.usecases.dailymeals.onSuccess
 import com.applications.toms.weeklymeals.utils.ScopedViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,9 +30,9 @@ class EditViewModel(
 
     init {
         launch {
-            getDailyMeals.invoke()
+            getDailyMeals.execute(Unit)
                 .onSuccess { result ->
-                    _weekMeals.value = result.dailyMeals.toMutableList()
+                    _weekMeals.value = result.toMutableList()
                 }
                 .onFailure { result ->
                     /* TODO */
@@ -43,7 +43,7 @@ class EditViewModel(
     fun saveListToDB(weekMeals: List<Day>) {
         _saving.value = true
         launch {
-            saveDailyMeals.invoke(weekMeals)
+            saveDailyMeals.execute(weekMeals)
                 .onSuccess { _saving.value = false }
                 .onFailure { _saving.value = false }
         }
