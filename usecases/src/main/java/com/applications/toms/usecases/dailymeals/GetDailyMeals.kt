@@ -1,28 +1,16 @@
 package com.applications.toms.usecases.dailymeals
 
-import com.applications.toms.usecases.ErrorStates
-import com.applications.toms.usecases.ErrorStates.*
+import com.applications.toms.data.Either
 import com.applications.toms.data.repository.DailyMealsRepository
 import com.applications.toms.domain.Day
-import com.applications.toms.usecases.dailymeals.GetDailyMeals.*
+import com.applications.toms.domain.ErrorStates
+import com.applications.toms.usecases.UseCase
 
-class GetDailyMeals(private val repository: DailyMealsRepository):
-    Either<OkOutput,KoOutput>() {
+class GetDailyMeals(
+    private val repository: DailyMealsRepository
+) : UseCase<Unit, List<Day>>() {
 
-    data class OkOutput(
-        val dailyMeals: List<Day>
-    )
-
-    data class KoOutput(
-        val error: ErrorStates
-    )
-
-    suspend fun invoke(): Either<OkOutput, KoOutput> {
-        val list = repository.getDailyMeals()
-        return if (list.isEmpty())
-            eitherFailure(KoOutput(EMPTY_LIST))
-        else
-            eitherSuccess(OkOutput(list))
-    }
+    override suspend fun buildUseCase(input: Unit): Either<List<Day>, ErrorStates> =
+        repository.getDailyMeals()
 
 }

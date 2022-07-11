@@ -1,8 +1,13 @@
-package com.applications.toms.usecases.dailymeals
+package com.applications.toms.data
 
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
+
+enum class EitherState {
+    SUCCESS,
+    FAILURE
+}
 
 sealed class Either<out T, out E> {
     data class Success<out T>(val data: T): Either<T, Nothing>()
