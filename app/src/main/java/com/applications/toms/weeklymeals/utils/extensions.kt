@@ -17,9 +17,7 @@ fun Meal.getMealTypeText(): String {
 
 @Composable
 fun List<Day>.asDeeplinkString(): String {
-    var query = ""/*"day=${Calendar.getInstance().get(Calendar.DAY_OF_MONTH)}/${
-        Calendar.getInstance().get(
-            Calendar.MONTH)}/${Calendar.getInstance().get(Calendar.YEAR)}"*/
+    var query = ""
     this.forEach {
         query +="${it.day}=${it.lunch.getMealTypeText()}:${it.lunch.meal.replace(" ","_")}" +
                 "|${it.diner.getMealTypeText()}:${it.diner.meal.replace(" ","_")}"
