@@ -9,7 +9,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.applications.toms.weeklymeals.ui.navigation.NavItem.*
+import com.applications.toms.weeklymeals.ui.navigation.NavItem.Deeplink
+import com.applications.toms.weeklymeals.ui.navigation.NavItem.Edit
+import com.applications.toms.weeklymeals.ui.navigation.NavItem.Main
 import com.applications.toms.weeklymeals.ui.screens.edit.EditScreen
 import com.applications.toms.weeklymeals.ui.screens.home.HomeScreen
 import com.applications.toms.weeklymeals.utils.fromDeepLink

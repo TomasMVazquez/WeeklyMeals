@@ -1,12 +1,12 @@
 package com.applications.toms.weeklymeals.ui.screens.home
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.applications.toms.data.onFailure
 import com.applications.toms.data.onSuccess
 import com.applications.toms.domain.Day
 import com.applications.toms.domain.ErrorStates
 import com.applications.toms.usecases.dailymeals.GetDailyMeals
-import com.applications.toms.weeklymeals.utils.ScopedViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,9 +15,8 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class HomeViewModel(
-    private val getDailyMeals: GetDailyMeals,
-    uiDispatcher: CoroutineDispatcher
-) : ScopedViewModel(uiDispatcher) {
+    private val getDailyMeals: GetDailyMeals
+) : ViewModel() {
 
     private val _state = MutableStateFlow(State())
     val state: StateFlow<State> = _state.asStateFlow()
@@ -35,12 +34,8 @@ class HomeViewModel(
         }
     }
 
-    init {
-        getListFromUseCase()
-    }
-
-    private fun getListFromUseCase() {
-        launch {
+    fun getListFromUseCase() {
+        viewModelScope.launch {
             getDailyMeals.execute(Unit)
                 .onSuccess { result ->
                     _state.update { state ->

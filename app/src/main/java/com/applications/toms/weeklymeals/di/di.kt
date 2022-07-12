@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import org.koin.dsl.module
@@ -23,7 +24,7 @@ fun Application.initDi(){
     startKoin {
         androidLogger(Level.ERROR)
         androidContext(this@initDi)
-        modules(listOf(appModule, dataModule, useCasesModule))
+        modules(listOf(appModule, dataModule, useCasesModule, viewModelModule))
     }
 }
 
@@ -47,6 +48,9 @@ private val dataModule = module {
 private val useCasesModule = module {
     single { GetDailyMeals(get()) }
     single { SaveDailyMeals(get()) }
-    single { HomeViewModel(get(), get()) }
-    single { EditViewModel(get(), get(), get()) }
+}
+
+private val viewModelModule = module {
+    viewModel { HomeViewModel(get()) }
+    viewModel { EditViewModel(get(), get()) }
 }

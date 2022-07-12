@@ -1,5 +1,6 @@
 package com.applications.toms.weeklymeals.ui.screens.edit
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.applications.toms.data.onFailure
 import com.applications.toms.data.onSuccess
@@ -8,8 +9,6 @@ import com.applications.toms.domain.ErrorStates
 import com.applications.toms.usecases.dailymeals.GetDailyMeals
 import com.applications.toms.usecases.dailymeals.SaveDailyMeals
 import com.applications.toms.weeklymeals.ui.composables.SnackBarType
-import com.applications.toms.weeklymeals.utils.ScopedViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,9 +19,8 @@ import kotlinx.coroutines.launch
 
 class EditViewModel(
     private val getDailyMeals: GetDailyMeals,
-    private val saveDailyMeals: SaveDailyMeals,
-    uiDispatcher: CoroutineDispatcher
-) : ScopedViewModel(uiDispatcher) {
+    private val saveDailyMeals: SaveDailyMeals
+) : ViewModel() {
 
     private val _state = MutableStateFlow(State())
     val state: StateFlow<State> = _state.asStateFlow()
@@ -41,7 +39,7 @@ class EditViewModel(
     }
 
     init {
-        launch {
+        viewModelScope.launch {
             getDailyMeals.execute(Unit)
                 .onSuccess { result ->
                     _state.update { state ->
@@ -62,9 +60,9 @@ class EditViewModel(
         }
     }
 
-    fun saveListToDB(weekMeals: List<Day>) {
-        launch {
-            saveDailyMeals.execute(weekMeals)
+    fun saveListToDB() {
+        viewModelScope.launch {
+            saveDailyMeals.execute(state.value.week)
                 .onSuccess {
                     _state.update { state ->
                         state.copy(

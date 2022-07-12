@@ -78,9 +78,7 @@ fun EditScreen(
         },
         floatingActionButton = {
             if (state.ready)
-                SaveFloatingActionButton {
-                    editViewModel.saveListToDB(shareList.ifEmpty { state.week })
-                }
+                SaveFloatingActionButton { editViewModel.saveListToDB() }
         },
         floatingActionButtonPosition = FabPosition.Center,
         scaffoldState = scaffoldState,

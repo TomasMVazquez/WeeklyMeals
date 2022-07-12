@@ -41,6 +41,10 @@ fun HomeScreen(
 
     val state by homeViewModel.state.collectAsState()
 
+    LaunchedEffect(key1 = Unit) {
+        homeViewModel.getListFromUseCase()
+    }
+
     val context = LocalContext.current
     val query = state.week.asDeeplinkString()
 
@@ -89,10 +93,12 @@ private fun WeeklyMealsCards(
     myWeek: List<Day>,
     onTitleChange: (String) -> Unit
 ) {
-    var idPressed by rememberSaveable { mutableStateOf(0) }
+    var idPressed by rememberSaveable { mutableStateOf( 0 ) }
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
     var firstEntry by rememberSaveable { mutableStateOf(true) }
+
+    myWeek.firstOrNull() { it.currentDay }?.id?.let { idPressed = it }
 
     LaunchedEffect(pagerState.currentPage, idPressed) {
         when {
