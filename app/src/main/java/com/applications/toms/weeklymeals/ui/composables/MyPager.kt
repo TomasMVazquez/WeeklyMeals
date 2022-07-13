@@ -1,6 +1,5 @@
 package com.applications.toms.weeklymeals.ui.composables
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -13,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import com.applications.toms.domain.Day
@@ -32,14 +30,7 @@ fun MyPager(
 
     HorizontalPager(
         count = week.size,
-        modifier = Modifier
-            .background(Color.LightGray)
-            .padding(
-                start = dimensionResource(id = R.dimen.zeroDp),
-                top = dimensionResource(id = R.dimen.zeroDp),
-                end = dimensionResource(id = R.dimen.zeroDp),
-                bottom = dimensionResource(id = R.dimen.padding_48)
-            ),
+        modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_48)),
         state = pagerState
     ) { page ->
 

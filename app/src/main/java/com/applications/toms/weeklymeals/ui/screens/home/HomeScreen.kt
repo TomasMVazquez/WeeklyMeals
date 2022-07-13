@@ -3,11 +3,17 @@ package com.applications.toms.weeklymeals.ui.screens.home
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,6 +31,7 @@ import com.applications.toms.weeklymeals.R
 import com.applications.toms.weeklymeals.ui.composables.MyMainTopAppBar
 import com.applications.toms.weeklymeals.ui.composables.MyPager
 import com.applications.toms.weeklymeals.ui.composables.RowDayClickable
+import com.applications.toms.weeklymeals.ui.composables.SwitchView
 import com.applications.toms.weeklymeals.utils.asDeeplinkString
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
@@ -75,14 +82,29 @@ fun HomeContent(
     myWeek: List<Day>,
     onTitleChange: (String) -> Unit
 ) {
-    Box(
+    var grilledView by rememberSaveable { mutableStateOf(false) }
+
+    Column(
         modifier = Modifier
             .padding(paddingValues)
-            .fillMaxSize(),
-        contentAlignment = Alignment.BottomStart
+            .background(color = MaterialTheme.colors.background),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        //TODO ADD OPTION TO SHOW DIFFERENT LAYOUT
-        WeeklyMealsCards(myWeek = myWeek, onTitleChange = onTitleChange)
+
+        SwitchView(
+            checked = grilledView,
+            onChecked = { grilledView = it }
+        )
+
+        Crossfade(targetState = grilledView) { visible ->
+            if (visible)
+                //TODO Add new grilled view!
+                CircularProgressIndicator()
+            else
+                WeeklyMealsCards(myWeek = myWeek, onTitleChange = onTitleChange)
+        }
+
     }
 }
 
@@ -116,25 +138,31 @@ private fun WeeklyMealsCards(
         }
     }
 
-    MyPager(
-        week = myWeek,
-        pagerState = pagerState,
-    )
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomStart
+    ) {
+        MyPager(
+            week = myWeek,
+            pagerState = pagerState,
+        )
 
-    RowDayClickable(
-        days = myWeek,
-        id = idPressed,
-        onClick = { day ->
-            coroutineScope.launch {
-                day.id.let {
-                    pagerState.animateScrollToPage(it)
-                    onTitleChange(myWeek[it].day)
-                    idPressed = it
+        RowDayClickable(
+            days = myWeek,
+            id = idPressed,
+            onClick = { day ->
+                coroutineScope.launch {
+                    day.id.let {
+                        pagerState.animateScrollToPage(it)
+                        onTitleChange(myWeek[it].day)
+                        idPressed = it
+                    }
                 }
-            }
 
-        }
-    )
+            }
+        )
+    }
+
 }
 
 fun onShare(context: Context, query: String) {
