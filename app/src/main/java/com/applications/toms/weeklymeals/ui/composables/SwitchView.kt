@@ -28,7 +28,7 @@ fun SwitchView(
                 .padding(end = dimensionResource(id = R.dimen.padding_8)),
             textAlign = TextAlign.End,
             text = stringResource(R.string.switch_view_title),
-            style = MaterialTheme.typography.h6
+            style = MaterialTheme.typography.h5
         )
 
         Switch(

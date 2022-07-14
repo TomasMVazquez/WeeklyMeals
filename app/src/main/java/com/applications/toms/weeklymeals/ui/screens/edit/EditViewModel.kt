@@ -32,6 +32,7 @@ class EditViewModel(
         _state.update { state ->
             state.copy(
                 loading = false,
+                isShareList = true,
                 ready = true,
                 week = shareList.toMutableList()
             )
@@ -45,7 +46,8 @@ class EditViewModel(
                     _state.update { state ->
                         state.copy(
                             loading = false,
-                            week = result
+                            isShareList = !state.isShareList,
+                            week = if (state.isShareList) state.week else result
                         )
                     }
                 }
@@ -112,6 +114,7 @@ class EditViewModel(
 
     data class State(
         val loading: Boolean = true,
+        val isShareList: Boolean = false,
         val ready: Boolean = false,
         val week: List<Day> = emptyList(),
         val error: ErrorStates? = null,

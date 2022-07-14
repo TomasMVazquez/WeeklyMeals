@@ -2,6 +2,7 @@ package com.applications.toms.weeklymeals.ui.composables
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
@@ -15,7 +16,12 @@ import com.applications.toms.weeklymeals.R
 @Composable
 fun MyMainTopAppBar(title: String, onEditClick: () -> Unit, onShareClick: () -> Unit){
     TopAppBar(
-        title = { Text(text = title) },
+        title = {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.h4
+            )
+        },
         actions = {
             IconButton(onClick = onEditClick) {
                 Icon(
@@ -36,7 +42,12 @@ fun MyMainTopAppBar(title: String, onEditClick: () -> Unit, onShareClick: () -> 
 @Composable
 fun BackTopAppBar(title: String, onBackClick: () -> Unit){
     TopAppBar(
-        title = { Text(text = title) },
+        title = {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.h4
+            )
+        },
         navigationIcon = {
             IconButton(onClick = onBackClick) {
                 Icon(

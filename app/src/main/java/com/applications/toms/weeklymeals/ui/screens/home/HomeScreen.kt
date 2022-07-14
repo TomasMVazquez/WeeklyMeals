@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.applications.toms.domain.Day
 import com.applications.toms.weeklymeals.R
+import com.applications.toms.weeklymeals.ui.composables.GrillView
 import com.applications.toms.weeklymeals.ui.composables.MyMainTopAppBar
 import com.applications.toms.weeklymeals.ui.composables.MyPager
 import com.applications.toms.weeklymeals.ui.composables.RowDayClickable
@@ -38,6 +40,7 @@ import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
+@ExperimentalFoundationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
 @Composable
@@ -74,6 +77,7 @@ fun HomeScreen(
     }
 }
 
+@ExperimentalFoundationApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi
 @Composable
@@ -99,8 +103,7 @@ fun HomeContent(
 
         Crossfade(targetState = grilledView) { visible ->
             if (visible)
-                //TODO Add new grilled view!
-                CircularProgressIndicator()
+                GrillView(list = myWeek)
             else
                 WeeklyMealsCards(myWeek = myWeek, onTitleChange = onTitleChange)
         }

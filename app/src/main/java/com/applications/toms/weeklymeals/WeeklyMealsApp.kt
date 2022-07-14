@@ -1,5 +1,6 @@
 package com.applications.toms.weeklymeals
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -10,6 +11,7 @@ import com.applications.toms.weeklymeals.ui.navigation.Navigation
 import com.applications.toms.weeklymeals.ui.theme.WeeklyMealsTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
 
+@ExperimentalFoundationApi
 @ExperimentalComposeUiApi
 @ExperimentalPagerApi
 @ExperimentalMaterialApi

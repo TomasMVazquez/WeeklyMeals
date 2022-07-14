@@ -6,6 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 import com.applications.toms.weeklymeals.R
 
@@ -35,18 +36,19 @@ val Typography = Typography(
     ),
     h4= TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 32.sp,
+        fontSize = 24.sp,
         letterSpacing = 0.25.sp
     ),
     h5= TextStyle(
-        fontWeight = FontWeight.Bold,
-        fontSize = 24.sp,
-        letterSpacing = 0.sp
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp,
+        letterSpacing = 0.15.sp,
     ),
     h6= TextStyle(
         fontWeight = FontWeight.Medium,
-        fontSize = 20.sp,
-        letterSpacing = 0.15.sp
+        fontSize = 18.sp,
+        letterSpacing = 0.15.sp,
+        textDecoration = TextDecoration.Underline
     ),
     subtitle1= TextStyle(
         fontWeight = FontWeight.Normal,

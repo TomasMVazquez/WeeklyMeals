@@ -1,5 +1,6 @@
 package com.applications.toms.weeklymeals.ui.navigation
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -17,6 +18,7 @@ import com.applications.toms.weeklymeals.ui.screens.home.HomeScreen
 import com.applications.toms.weeklymeals.utils.fromDeepLink
 import com.google.accompanist.pager.ExperimentalPagerApi
 
+@ExperimentalFoundationApi
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
@@ -27,6 +29,7 @@ fun Navigation(navController: NavHostController){
     }
 }
 
+@ExperimentalFoundationApi
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
