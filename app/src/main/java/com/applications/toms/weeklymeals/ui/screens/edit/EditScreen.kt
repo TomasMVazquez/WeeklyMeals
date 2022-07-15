@@ -73,7 +73,7 @@ fun EditScreen(
         topBar = {
             BackTopAppBar(
                 title = stringResource(R.string.edit_title),
-                onBackClick = { if (!state.ready) onBackClick() }
+                onBackClick = { if (!state.ready) onBackClick() } //TODO ADD DIALOG SAYING NOT SAVED
             )
         },
         floatingActionButton = {

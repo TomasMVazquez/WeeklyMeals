@@ -2,9 +2,11 @@ package com.applications.toms.weeklymeals.ui.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.GridCells
@@ -29,7 +31,10 @@ import com.applications.toms.weeklymeals.R
 fun GrillView(
     list: List<Day>
 ) {
-    LazyVerticalGrid(cells = GridCells.Fixed(2)) {
+    LazyVerticalGrid(
+        modifier = Modifier.fillMaxSize().background(color = MaterialTheme.colors.surface),
+        cells = GridCells.Fixed(2)
+    ) {
         items(list) {
             DailyMealCard(it)
         }
@@ -45,7 +50,8 @@ fun DailyMealCard(
         border = BorderStroke(
             width = 1.dp,
             color = Color.Black
-        )
+        ),
+        backgroundColor = MaterialTheme.colors.primary
     ) {
         Column(
             modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_4)),
@@ -60,7 +66,7 @@ fun DailyMealCard(
                 text = day.day,
                 style = MaterialTheme.typography.h4,
                 textAlign = TextAlign.Center,
-                color = if (day.currentDay) MaterialTheme.colors.secondary else MaterialTheme.colors.onSurface
+                color = if (day.currentDay) MaterialTheme.colors.secondaryVariant else MaterialTheme.colors.onSurface
             )
 
             Row(

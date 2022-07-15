@@ -91,7 +91,7 @@ fun HomeContent(
     Column(
         modifier = Modifier
             .padding(paddingValues)
-            .background(color = MaterialTheme.colors.background),
+            .background(color = MaterialTheme.colors.surface),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
